@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'AniTracker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'localhost',
+        'NAME': 'anitrack',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'PORT': '5432',
     }
 }
 

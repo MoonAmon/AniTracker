@@ -1,3 +1,50 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import User
 
-# Create your models here.
+
+class Manga(models.Model):
+    title = models.CharField(max_length=300)
+    mangadex_id = models.CharField(max_length=150, unique=True)
+    anilist_id = models.CharField(max_length=150, unique=True)
+    description = models.CharField(max_length=500)
+    cover_art = models.CharField(max_length=150, unique=True)
+    total_chapters = models.IntegerField()
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=300)
+    book_id = models.CharField(max_length=150, unique=True)
+    description = models.CharField(max_length=500)
+    cover_art = models.CharField(max_length=150, unique=True)
+    total_page = models.IntegerField()
+
+
+class Anime(models.Model):
+    title = models.CharField(max_length=300)
+    anilist_id = models.CharField(max_length=150, unique=True)
+    description = models.CharField(max_length=500)
+    cover_art = models.CharField(max_length=150, unique=True)
+    total_episodes = models.IntegerField()
+    duration = models.IntegerField()
+
+
+class Progress(models.Model):
+    MEDIA_TYPE_CHOICES = [
+        ('ANIME', 'Anime'),
+        ('MANGA', 'Manga'),
+        ('BOOK', 'Book'),
+    ]
+    STATUS_CHOICES = [
+        ('ONGOING', 'Ongoing'),
+        ('COMPLETED', 'Completed'),
+        ('ON_HOLD', 'On Hold'),
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    media_type = models.CharField(max_length=10, choices=MEDIA_TYPE_CHOICES)
+    media_id = models.IntegerField()
+    episode_number = models.IntegerField(null=True, blank=True)
+    chapter_number = models.IntegerField(null=True, blank=True)
+    page_number = models.IntegerField(null=True, blank=True)
+    star_rate = models.IntegerField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
