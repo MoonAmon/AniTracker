@@ -1,0 +1,20 @@
+{% extends 'base_template.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+{% for anime in animes|slice:":5" %}
+    
+<div class="card m-2" style="width: 18rem; height: 40rem;">
+    <img src="{{ anime.coverImage.large }}" class="card-img-top" alt="">
+    <div class="card-body">
+        <h5 class="card-title">{{ anime.title.romaji }}</h5>
+        <p class="card-text">Avarage Score: {{ anime.averageScore }}</p>
+        <a href="#" class="card-link">See more</a>
+    </div>
+</div>
+    
+{% endfor %}
+    </div>
+{% endblock %}

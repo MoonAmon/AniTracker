@@ -53,7 +53,11 @@ class MangaDexAPI:
 
     def get_cover_art(self, manga_id, cover_art_id):
         response = f"{self.COVER_URL}/covers/{manga_id}/{cover_art_id}.jpg"
-        return response
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Error: {response.status_code}: {response.content}")
+            return None
 
     def get_chapter_list(self, manga_id):
         response = requests.get(f"{self.BASE_URL}/manga/{manga_id}/feed")
@@ -66,6 +70,9 @@ class MangaDexAPI:
 
 class AniListAPI(MangaDexAPI):
     BASE_URL = "https://graphql.anilist.co"
+
+    def __init__(self):
+        self.cache = {}
 
     def get_anime(self, anime_id):
         query = """
@@ -102,6 +109,9 @@ class AniListAPI(MangaDexAPI):
             return None
 
     def search_anime(self, title):
+        if title in self.cache:
+            return self.cache[title]
+
         query = """
         query ($title: String) {
             Page { 
@@ -109,6 +119,7 @@ class AniListAPI(MangaDexAPI):
                     id
                     title {
                         english
+                        romaji
                         }
                     description
                     startDate {
@@ -119,17 +130,21 @@ class AniListAPI(MangaDexAPI):
                         large
                         medium
                     }
+                    averageScore
                 }
             }
         }
         """
+
         variables = {
             'title': title
         }
 
         response = requests.post(self.BASE_URL, json={'query': query, 'variables': variables})
         if response.status_code == 200:
-            return response.json()['data']['Page']['media']
+            data = response.json()['data']['Page']['media']
+            self.cache[title] = data
+            return data
         else:
             print(f"Error: {response.status_code}, {response.content}")
             return None
