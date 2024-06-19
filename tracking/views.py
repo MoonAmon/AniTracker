@@ -16,8 +16,9 @@ def search(request):
     else:
         return render(request, 'search.html', {'form': form})
 
+
 def home(request):
-    random_animes = API_ANILIST.search_anime('Dungeon')
+    random_animes = API_ANILIST.search_anime('Naruto')
     return render(request, 'home.html', {'animes': random_animes})
 
 
