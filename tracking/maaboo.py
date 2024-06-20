@@ -8,7 +8,7 @@ class OpenBookAPI:
         response = requests.get(f"{self.BASE_URL}/api/books?bibkeys=ISBN:{isbn}&format=json&jscmd=data")
         if response.status_code == 200:
             response_json = response.json()
-            return response_json[0]
+            return next(iter(response_json.values()))
         else:
             print(f"Error: {response.status_code}: {response.content}")
             return None
@@ -90,7 +90,9 @@ class AniListAPI(MangaDexAPI):
                 color
             }
             status
-            startDate
+            startDate {
+                year
+            }
             description
             episodes
             duration
@@ -156,7 +158,7 @@ class AniListAPI(MangaDexAPI):
 
         cleaned_data = {'id': raw_data.get('id', 'N/A'), 'title': raw_data.get('title', 'N/A'),
                         'description': raw_data.get('description', 'N/A'),
-                        'coverImage': raw_data.get('coveImage', {}).get('large')}
+                        'coverImage': raw_data.get('coverImage', {}).get('large')}
 
         return cleaned_data
 
@@ -218,15 +220,16 @@ class MangaData(MangaDexAPI):
 
 class AnimeData(AniListAPI):
     def __init__(self, anime_id):
+        super().__init__()
         self._anime_id = anime_id
         self._anime_response_data = self.get_anime(anime_id)
-        self._cover_art = self._anime_response_data['data']['coverImage']['large']
-        self._title = self._anime_response_data['data']['title'][0]
-        self._year = self._anime_response_data['data']['startDate']['year']
-        self._status = self._anime_response_data['data']['status']
-        self._description = self._anime_response_data['data']['description']
-        self._episodes_number = self._anime_response_data['data']['episodes']
-        self._duration_each_episode = self._anime_response_data['data']['duration']
+        self._cover_art = self._anime_response_data['data']['Media']['coverImage']['large']
+        self._title = self._anime_response_data['data']['Media']['title']['romaji']
+        self._year = self._anime_response_data['data']['Media']['startDate']['year']
+        self._status = self._anime_response_data['data']['Media']['status']
+        self._description = self._anime_response_data['data']['Media']['description']
+        self._episodes_number = self._anime_response_data['data']['Media']['episodes']
+        self._duration_each_episode = self._anime_response_data['data']['Media']['duration']
 
     @property
     def title(self):
@@ -255,6 +258,10 @@ class AnimeData(AniListAPI):
     @property
     def duration(self):
         return self._duration_each_episode
+
+    @property
+    def anime_id(self):
+        return self._anime_id
 
 
 class BookData(OpenBookAPI):

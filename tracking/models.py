@@ -7,7 +7,7 @@ class Manga(models.Model):
     title = models.CharField(max_length=300)
     mangadex_id = models.CharField(max_length=150, unique=True)
     anilist_id = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=2000)
     cover_art = models.CharField(max_length=150, unique=True)
     total_chapters = models.IntegerField()
 
@@ -23,10 +23,10 @@ class Book(models.Model):
 class Anime(models.Model):
     title = models.CharField(max_length=300)
     anilist_id = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=2000)
     cover_art = models.CharField(max_length=150, unique=True)
     total_episodes = models.IntegerField()
-    duration = models.IntegerField()
+    duration = models.IntegerField(null=True)
 
 
 class Progress(models.Model):

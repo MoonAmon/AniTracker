@@ -27,6 +27,15 @@ header {
     padding: 1rem;
 }
 
+.title-anime {
+    color: #FFFFFF;
+}
+
+header h1 .logo:link {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
 header h1 {
     font-weight: bold;
 }

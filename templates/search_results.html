@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Results</title>
-</head>
-<body>
-<h1>Results</h1>
+{% extends 'base_template.html' %}
+
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
 <h2>Anime</h2>
 {% for ani in anime %}
-    <img src="{{ ani.coverImage.large }}">
-    <p>{{ ani.title.english }}</p>
-    <p>{{ ani.description }}</p>
+    <a href="{{ ani.detail_url }}">{{ ani.title.romaji }}</a>
 {% endfor %}
-<p>{{ anime }}</p>
-</body>
-</html>
+{% endblock %}

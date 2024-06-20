@@ -1,0 +1,13 @@
+{% extends "base_template.html" %}
+
+{% load static %}
+
+{% block title %}Anime Details{% endblock %}
+
+{% block content %}
+    <h1 class="title-anime">{{ data.title }}</h1>
+    <img src="{{ data.cover_art }}" alt="{{ data.title }} cover art">
+    <p>{{ data.description }}</p>
+    <p>Number of episodes: {{ data.episodes_number }}</p>
+    <p>Duration of each episode: {{ data.duration }} minutes</p>
+{% endblock %}

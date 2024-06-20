@@ -24,5 +24,8 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('logout/', views.logout_view, name='logout'),
-    path('home/', views.home, name='home')
+    path('home/', views.home, name='home'),
+    path('anime/<int:media_id>', views.AnimeDetailView.as_view(), name='anime_detail'),
+    path('manga/<int:media_id>', views.MangaDetailView.as_view(), name='manga_detail'),
+    path('book/<int:media_id>', views.BookDetailView.as_view(), name='book_detail'),
 ]
