@@ -5,9 +5,25 @@
 {% block title %}Anime Details{% endblock %}
 
 {% block content %}
-    <h1 class="title-anime">{{ data.title }}</h1>
-    <img src="{{ data.cover_art }}" alt="{{ data.title }} cover art">
-    <p>{{ data.description }}</p>
-    <p>Number of episodes: {{ data.episodes_number }}</p>
-    <p>Duration of each episode: {{ data.duration }} minutes</p>
+    <div class="container-detail">
+        <div class="side">
+            <img src="{{ data.cover_art }}" alt="{{ data.title }} cover art">
+            <div class="button-add-list">
+                <button type="button" class="btn-add">Add to List</button>
+                <button type="button" class="btn-fav">Fav</button>
+            </div>
+            <div class="data-side">
+                <p><strong>Episodes</strong></p>
+                <p>{{ data.episodes_number }}</p>
+                <p><strong>Duration</strong></p>
+                <p>{{ data.duration }} minutes</p>
+                <p><strong>Original</strong></p>
+                <p>{{ data.title }}</p>
+            </div>
+        </div>
+        <div class="center">
+            <h1 class="title-anime">{{ data.title }}</h1>
+            <p class="center-text">{{ data.description }}</p>
+        </div>
+    </div>
 {% endblock %}

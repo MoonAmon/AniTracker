@@ -11,20 +11,19 @@
 <header>
     <h1><a href="/home/" class="logo">Anitracker</a></h1>
     <nav>
-        <a href="/home/">Anitracker</a>
         {% if user.is_authenticated %}
-            <a href="#">Profile</a>
+            <a href="/home/">Home</a>
             <a href="#">Anime List</a>
             <a href="#">Manga List</a>
-            <a href="#">Book List</a>
+            <a href="#">Profile</a>
+            <a href="/logout/">Log out</a>
         {% else %}
+            <a href="/home/">Home</a>
             <a href="/login/">Login</a>
             <a href="/register/">Register</a>
         {% endif %}
     </nav>
     <form role="search" class="form" method="get" action="{% url 'search' %}">
-        {% csrf_token %}
-        {{ form }}
         <input name="query" placeholder="Search">
         <button type="submit">Search</button>
     </form>

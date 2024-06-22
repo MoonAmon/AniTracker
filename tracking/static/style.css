@@ -72,6 +72,24 @@ header .form button {
     cursor: pointer;
 }
 
+.container-detail {
+    display: flex;
+    align-items: center;
+}
+
+.container-detail .center-text {
+    color: #FFFFFF;
+}
+
+main .side {
+    background: #FFFFFF;
+    width: 25%;
+}
+
+main .center {
+    background: #4065ba;
+}
+
 .card-section {
     display: flex;
     gap: 1.5rem;
