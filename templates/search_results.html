@@ -4,8 +4,20 @@
 {% block title %}Search Results{% endblock %}
 
 {% block content %}
-<h2>Anime</h2>
-{% for ani in anime %}
-    <a href="{{ ani.detail_url }}">{{ ani.title.romaji }}</a>
-{% endfor %}
+    <div class="search-container">
+        <div class="results-section">
+            <h2>Anime</h2>
+            <ul id="anime-results">
+            {% for ani in anime %}
+                <li>
+                    <img src="{{ ani.coverImage.medium }}">
+                <div>
+                    <h3><a href="{% url 'anime_detail' ani.id %}">{{ ani.title.romaji }}</a></h3>
+                    <p>{{ ani.startDate.year }}</p>
+                </div>
+                </li>
+            {% endfor %}
+            </ul>
+       </div> 
+     </div>
 {% endblock %}

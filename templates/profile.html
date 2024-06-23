@@ -3,5 +3,25 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-    
+   <main class="container-profile">
+       <div class="profile-header">
+          <div class="profile-user-data">
+             <h2>Welcome, {{ user.username }}</h2> 
+          </div> 
+       </div>
+       <div class="profile-grid">
+           <section>
+               <hgroup>
+                   <h2>Favorites</h2>
+               </hgroup>
+               <div class="anime-list">
+                   
+               </div>
+               <h2>Currently Watching</h2>
+               
+               <h2>Completed</h2>
+               
+           </section>
+       </div>
+   </main> 
 {% endblock %}

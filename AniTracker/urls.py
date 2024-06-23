@@ -28,4 +28,5 @@ urlpatterns = [
     path('anime/<int:media_id>', views.AnimeDetailView.as_view(), name='anime_detail'),
     path('manga/<int:media_id>', views.MangaDetailView.as_view(), name='manga_detail'),
     path('book/<int:media_id>', views.BookDetailView.as_view(), name='book_detail'),
+    path('profile/', views.profile, name='profile'),
 ]
