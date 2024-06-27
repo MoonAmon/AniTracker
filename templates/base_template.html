@@ -11,17 +11,19 @@
 <header>
     <h1><a href="/home/" class="logo">Anitracker</a></h1>
     <nav>
+       <ul class="nav-links">
         {% if user.is_authenticated %}
-            <a href="/home/">Home</a>
-            <a href="#">Anime List</a>
-            <a href="#">Manga List</a>
-            <a href="#">Profile</a>
-            <a href="/logout/">Log out</a>
+            <li><a href="/home/">Home</a></li>
+            <li><a href="#">Anime List</a></li>
+            <li><a href="#">Manga List</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="/logout/">Log out</a></li>
         {% else %}
-            <a href="/home/">Home</a>
-            <a href="/login/">Login</a>
-            <a href="/register/">Register</a>
+            <li><a href="/home/">Home</a></li>
+            <li><a href="/login/">Login</a></li>
+            <li><a href="/register/">Register</a></li>
         {% endif %}
+       </ul> 
     </nav>
     <form role="search" class="form" method="get" action="{% url 'search' %}">
         <input name="query" placeholder="Search">

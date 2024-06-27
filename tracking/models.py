@@ -11,6 +11,9 @@ class Manga(models.Model):
     cover_art = models.CharField(max_length=150, unique=True)
     total_chapters = models.IntegerField()
 
+    def __str__(self):
+        return self.title
+
 
 class Book(models.Model):
     title = models.CharField(max_length=300)
@@ -18,6 +21,9 @@ class Book(models.Model):
     description = models.CharField(max_length=500)
     cover_art = models.CharField(max_length=150, unique=True)
     total_page = models.IntegerField()
+
+    def __str__(self):
+        return self.title
 
 
 class Anime(models.Model):
@@ -27,6 +33,9 @@ class Anime(models.Model):
     cover_art = models.CharField(max_length=150, unique=True)
     total_episodes = models.IntegerField()
     duration = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Progress(models.Model):
@@ -48,3 +57,6 @@ class Progress(models.Model):
     page_number = models.IntegerField(null=True, blank=True)
     star_rate = models.IntegerField()
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+
+    def __str__(self):
+        return self.media_id
